@@ -16,3 +16,25 @@ commentary using **Snowflake Cortex AI** (Snowflake's native LLM functions).
 ## Branching
 
 Workflow: `users/<username>/<feature>` → `dev` → `main`, following Conventional Commits.
+
+## Running with Docker
+
+Instead of setting up a local Python environment, you can run everything inside a container:
+
+\`\`\`bash
+docker compose build
+docker compose up -d
+docker compose exec pipeline bash
+\`\`\`
+
+Once inside the container:
+
+\`\`\`bash
+python scripts/load_data.py
+dbt run
+dbt test
+python scripts/generate_commentary.py
+\`\`\`
+
+Note: you still need `~/.dbt/profiles.yml` configured on your host machine — it gets
+mounted read-only into the container.

@@ -1,0 +1,10 @@
+services:
+  pipeline:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - ~/.dbt/profiles.yml:/root/.dbt/profiles.yml:ro
+    tty: true
+    stdin_open: true
